@@ -10,12 +10,12 @@ export function bookEndList(numbers: number[]): number[] {
         return [];
     }
     else if(numbers.length === 1){
-        return [...numbers];
+        return [...numbers, ...numbers];
     }
     else{
-        numbers[0] , numbers[numbers.length-1]
+        return [numbers[0],numbers[numbers.length-1]]
     }
-    return numbers;
+
 }
 
 /**
@@ -23,8 +23,7 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-
-    return numbers;
+    return numbers.map(numbers => numbers*3);
 }
 
 /**
