@@ -30,9 +30,14 @@ export function tripleNumbers(numbers: number[]): number[] {
  * Consume an array of strings and convert them to integers. If
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
+//condition ? value_if_true : value_if_false;
 export function stringsToIntegers(numbers: string[]): number[] {
-
-    return [];
+    //change each element of the array to int
+    return numbers.map((str) => {
+        const parseNum = parseInt(str, 10);
+        //if parse in Nan, return 0. Otherwise return parseNum
+        return isNaN(parseNum) ? 0 : parseNum;
+    });
 }
 
 /**
@@ -43,8 +48,13 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-
-    return [];
+    return amounts.map((str) => {
+        if (str.startsWith("$")){
+           str = str.slice(1);
+        } 
+        const parse = parseInt(str,10);
+    return isNaN(parse) ? 0: parse;
+    } )
 };
 
 /**
