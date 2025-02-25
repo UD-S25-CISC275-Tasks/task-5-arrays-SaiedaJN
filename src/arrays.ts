@@ -63,27 +63,32 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-
-    return [];
-};
+    //.filter() removes the unwanted messages
+    return messages
+        .filter(message => !message.endsWith("?"))
+        //condition ? value_if_true : value_if_false;
+        .map(message => message.endsWith("!") ? message.toUpperCase(): message);
+    };
 
 /**
  * Consumes an array of words and returns the number of words that are LESS THAN
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-
-    return 0;
+    return words.filter(word => word.length < 4).length;
 }
 
 /**
  * Consumes an array of colors (e.g., 'red', 'purple') and returns true if ALL
  * the colors are either 'red', 'blue', or 'green'. If an empty list is given,
  * then return true.
+ * 
+ * .filter() creates a new array but does not check if all elements match the condition.
+ * every checks for all the elements
  */
 export function allRGB(colors: string[]): boolean {
-
-    return false;
+   return  colors.every(color => color === 'red' || color ==='blue'|| color === 'green' ? true :false);
+    
 }
 
 /**
@@ -94,9 +99,14 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
+        if (addends.length === 0) {
+            return "0=0";
+        }
 
-    return "";
-}
+        const add = addends.reduce((count, num) => count + num,0 );
+        return `${add}=${addends.join("+")}`;
+    }
+
 
 /**
  * Consumes an array of numbers and produces a new array of the same numbers,
@@ -108,6 +118,14 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-
-    return [];
+    let sum = 0;
+    let negat = false;
+    return values.reduce((count, value) => { if (!negat && value < 0){
+            negat = true;
+            return [...count, value, sum];
+        }
+        sum += value;
+        return [...count, value];
+    }, [] as number[])
+    .concat(negat ? []:[sum]);
 }
